@@ -1,0 +1,6 @@
+{
+  "name": "16_Extract_the_domain_name_from_a_URL",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}
