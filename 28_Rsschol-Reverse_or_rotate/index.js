@@ -1,41 +1,46 @@
-// Not finished!!!
 
-let str = "66443875"
-let cz = 4
+let str = "733049910872815764"
+let cz = 5
+
+let chunkReverser = (chunkArr) => {
+    let sum = 0,
+        result = [];
+    for (let i = 0; i < chunkArr.length; i++) {
+        sum += chunkArr[i] ** 3
+    }
+    if ((sum / 2) % Math.trunc(sum / 2) === 0) {
+        result = [...chunkArr.reverse()]
+        console.log("reverse elements")
+    } else {
+        let tmp = chunkArr.shift()
+        result = [...chunkArr,...tmp]
+        console.log("shift element")
+    }
+    return result
+}
 
 function revrot(str, sz) {
-    if (str <= 0 || str === "") return ""
-    let arrStr = str.split("");
-    let chunk = []
+    if (str <= 0 || str === "" || sz === 0 || str.length < sz) return ""
+    let arrStr = str.split(""),
+        chunk = [],
+        startNum = 0,
+        endNum = sz,
+        result = [];
 
-
-    let chunkReverser = (chunk) => {
-        let sum = 0;
-        let result = []
-        for (let i = 0; i < cz; i++) {
-            sum += chunk[i] ** 3
-        }
-        if ((sum / 2) % Math.trunc(sum / 2) === 0) {
-            result = [ ...chunk.reverse().concat()]
-        } else {
-            let tmp = chunk.shift();
-            result = [...result.push(tmp)]
-        }
-        return result
+    for (let j=1; j<=arrStr.length/sz; j++) {
+        //console.log(startNum,endNum)
+        for (let i = startNum, k=0; i < endNum; i++, k++) chunk[k] = str[i]
+        console.log(chunk);
+        startNum = startNum+sz;
+        endNum = endNum+sz;
+        result = [...result, ...chunkReverser(chunk)]
     }
-
-    let startNum = 3
-    let endNum = 7
-
-    for (let i = startNum; i < endNum; i++) chunk[i] = str[i]
-
-    console.log(chunk)
-    console.log(chunkReverser(chunk))
-
+//        console.log(result);
+    return result.join("");
 
 }
 
-revrot(str, cz);
+console.log(revrot(str, cz));
 
 // TASK
 // The input is a string str of digits. Cut the string into chunks (a chunk here is a substring of the initial string)
@@ -73,3 +78,18 @@ revrot(str, cz);
 //         s = "733049910872815764"
 //         testing(revrot(s, 5), "330479108928157")
 //     })})
+
+// BEST
+// function revrot(str, sz) {
+//     if (sz < 1 || sz > str.length)
+//         return '';
+//
+//     let reverse = s => s.split('').reverse().join('');
+//     let rotate  = s => s.slice(1) + s.slice(0, 1);
+//     let sum_cubes = c => c.split('').reduce((a, b) => a + +b ** 3, 0);
+//
+//     return str
+//         .match(new RegExp('.{' + sz + '}', 'g'))
+//         .map(c => sum_cubes(c) % 2 ? rotate(c) : reverse(c))
+//         .join('');
+// }
