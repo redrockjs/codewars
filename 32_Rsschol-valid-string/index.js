@@ -1,12 +1,15 @@
-let arr = ['code', 'wars'],
-    word = "codewars";
+/// Not worked!!!
+
+let arr = ['ab', 'bc'] ,
+    word = "abc"  ;
 
 
 const validWord = (dictionary, word) => {
     let valid = false;
     dictionary.forEach(el => {
-        //console.log(el, word, word.match(el))
+        console.log(el, word, word.match(el))
         if (word.match(el) !== null) valid = true;
+        if (word.match(el) === null) valid = false;
     })
     return valid
 };
@@ -50,10 +53,10 @@ console.log(validWord(arr, word))
 //         act([['Star', 'Code', 'Wars'], 'WarsStarCode', true]);
 //         act([['Star', 'Code', 'Wars'], 'CodeStarsWar', false]);
 //         act([[], 'codewars', false]);
-//         act([['code', 'wars'], 'code', true]);
+//         act([['code', 'wars'], 'code', true]); ?
 //         act([['a', 'b', 'c', 'd', 'e', 'f'], 'abcdef', true]);
-//         act([['a', 'b', 'c', 'd', 'e', 'f'], 'abcdefg', false]);
+//         act([['a', 'b', 'c', 'd', 'e', 'f'], 'abcdefg', false]); ?
 //         act([['ab', 'a', 'bc'], 'abc', true]);
-//         act([['ab', 'bc'], 'abc', false]);
+//         act([['ab', 'bc'], 'abc', false]); ?
 //     });
 // });
