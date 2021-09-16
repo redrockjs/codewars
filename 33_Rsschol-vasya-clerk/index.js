@@ -1,21 +1,66 @@
-const arr = [25,25,25,25,25,25,25,50,50,50,100,100,100,100];
+//const arr = [25, 25, 25, 25, 50, 100, 50]; //YES
+//const arr = [ 25, 100]; // NO
+const arr = [25, 25, 25, 100, 25, 25, 50, 100, 25, 25, 50, 100, 25, 25, 50, 100]; // YES
 
 function tickets(peopleInLine) {
-    let acc = 0,
-        isChange = true;
+    let _25baks = 0,
+        _50baks = 0,
+        _100baks = 0,
+        till = 0,
+        hasChange = true;
     peopleInLine.forEach(el => {
 
-        if (el>25 && acc-el<0) {
-            isChange = false;
-            acc += (25-el)
-        } else {
+            switch (el) {
+                case 25: {
+                    _25baks++
+                    till += 25
+                    console.log(`+25 till: ${till} change: 0 ----- 25$:${_25baks} 50$:${_50baks} 100$:${_100baks} hasChange:${hasChange}`)
+                    break;
+                }
+                case 50: {
+                    _25baks--
+                    _50baks++
+                    till += (el - 25)
+                    console.log(`+50 till: ${till} change: ${el - 25} ----- 25$:${_25baks} 50$:${_50baks} 100$:${_100baks} hasChange:${hasChange}`)
+                    break;
+                }
+                case 100: {
+                    if (_50baks <= 0 && _25baks >= 3) {
+                        _25baks -= 3
+                        _100baks++
+                        till += 25 - el
+                        console.log(`+100 till: ${till} change: ${el - 25} ----- 25$:${_25baks} 50$:${_50baks} 100$:${_100baks} hasChange:${hasChange}  "NO 50$"`)
+                    } else if (_50baks >= 1 && _25baks >= 1) {
+                        _25baks--
+                        _50baks--
+                        _100baks++
+                        till += 25 - el
+                        console.log(`+100 till: ${till} change: ${el - 25} ----- 25$:${_25baks} 50$:${_50baks} 100$:${_100baks} hasChange:${hasChange} "HAS 50$"`)
+                    } else {
+                        hasChange = false
+                        console.log(`+100 till: ${till} change: ${el - 25} ----- 25$:${_25baks} 50$:${_50baks} 100$:${_100baks} hasChange:${hasChange} "NO CHANGE - NO CHANCE"`)
+                    }
+                    break;
+                }
+                default:
+            }
 
+            if (el === 100
+                && ((_50baks < 0 && _25baks < 3)
+                    || (_50baks >= 1 && _25baks >= 1))) {
+                console.log("no change")
+                hasChange = false
+            }
+
+            if (_25baks < 0 || _50baks < 0 || _100baks < 0) {
+                hasChange = false
+                console.log("zero till")
+            }
         }
-
-        console.log(acc)
-    })
-    return isChange ? "YES" : "NO"
+    )
+    return (hasChange) ? "YES" : "NO"
 }
+
 
 console.log(tickets(arr));
 // tickets(arr);
@@ -57,3 +102,13 @@ console.log(tickets(arr));
 //         });
 //     }
 // });
+
+// BEST
+// const tickets = peopleInLine => {
+//     let [$25, $50] = [0, 0];
+//     for (let el of peopleInLine) {
+//         el === 25 ? $25++ : el === 50 ? ($50++, $25--) : ($50 ? $50-- : $25 -= 2, $25--);
+//         if ($25 < 0) return `NO`;
+//     }
+//     return `YES`;
+// };
