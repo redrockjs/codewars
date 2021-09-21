@@ -1,21 +1,42 @@
-/// Not worked!!!
 
-let arr = ['ab', 'bc'] ,
-    word = "abc"  ;
+// let arr = ['code', 'wars'], word = "codewars"  ; //-> true
+// let arr = ['wars', 'code'], word = "codewars"  ; //-> true
+// let arr = ['code', 'wars'], word = "codecodewars"  ; //-> true
+// let arr = ['code', 'wars'], word = "codewar"  ; //-> false
+// let arr = ['code', 'wars'], word = "codewarscode"  ; //-> true
 
+// let arr = ['code', 'star', 'wars'], word = "starwars"  ; //-> true
+// let arr = ['Star', 'Code', 'Wars'], word = "StarCodeWars"  ; //-> true
+// let arr = ['Star', 'Code', 'Wars'], word = "WarsStarCode"  ; //-> true
+// let arr = ['Star', 'Code', 'Wars'], word = "CodeStarsWar"  ; //-> false
+
+// let arr = [], word = "codewars"  ; //-> false
+// let arr = ['a', 'b', 'c', 'd', 'e', 'f'], word = "abcdef"  ; //-> true
+// let arr = ['a', 'b', 'c', 'd', 'e', 'f'], word = "abcdefg"  ; //-> false ????????
+// let arr = ['ab', 'a', 'bc'], word = "abc"  ; //-> true
+ let arr = ['ab', 'bc'], word = "abc"  ; //-> false  ??????????????
+
+// sort + replace
+
+// const validWord = (dictionary, word) => {
+//     let valid = false,
+//
+//
+//     dictionary.forEach(el => {
+//         (word.match(el) !== null) ? valid = true : valid = false
+//
+//     })
+//     console.log(arr.sort().join(""))
+//     return valid
+// };
 
 const validWord = (dictionary, word) => {
-    let valid = false;
-    dictionary.forEach(el => {
-        console.log(el, word, word.match(el))
-        if (word.match(el) !== null) valid = true;
-        if (word.match(el) === null) valid = false;
-    })
-    return valid
-};
-
+     let pattern = new RegExp('^(' + dictionary.join('|') + ')+$')
+     return pattern.test(word);
+}
 console.log(validWord(arr, word))
 //validWord(arr, word)
+
 
 // TASK
 // You are given a sequence of valid words and a string. Test if the string is made up by one or more words from the array.
