@@ -1,18 +1,20 @@
 function createFunctions(n) {
-    var callbacks = [];
+    let callbacks = [];
 
-    for (var i=0; i<n; i++) {
-        callbacks.push(function(i) {
-            let num = i
-            return num;
+    for (let i=0; i<n; i++) {
+        callbacks.push(function() {
+            return i;
         });
     }
     return callbacks;
 }
 
-var callbacks = createFunctions(5);
+let callbacks = createFunctions(5);
 
-console.log(callbacks[1]())
+console.log(callbacks[2]())
+
+
+// Solution - let change var on let
 
 // TASK
 // We want to create a function, which returns an array of functions, which return their
