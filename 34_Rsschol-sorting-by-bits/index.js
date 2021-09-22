@@ -1,30 +1,34 @@
-const arr = [7, 6, 15, 8]; // => [8, 6, 7, 15] // passed
-//const arr = [3, 8, 3, 6, 5, 7, 9, 1]; // => [1, 8, 3, 3, 5, 6, 9, 7] //failed
-//const arr = [9,4,5,3,5,7,2,56,8,2,6,8,0]; // => [0, 2, 2, 4, 8, 8, 3, 5, 5, 6, 9, 7, 56]// failed
-//                                              [0, 2, 2, 4, 8, 8, 9, 5, 5, 3, 6, 7, 56]
-
-
-let countBits =(binary)=> binary.split("").reduce((sum, el) => sum+Number(el),0)
+// const arr = [7, 6, 15, 8]; // => [8, 6, 7, 15]
+// const arr = [3, 8, 3, 6, 5, 7, 9, 1]; // => [1, 8, 3, 3, 5, 6, 9, 7]
+ const arr = [9,4,5,3,5,7,2,56,8,2,6,8,0]; // => [0, 2, 2, 4, 8, 8, 3, 5, 5, 6, 9, 7, 56]
 
 function sortByBit(arr) {
+    //console.log("Source array:", arr)
+    let countBits = (binary) => binary.split("").reduce((sum, el) => sum + Number(el), 0)
 
-    let binArr = arr.map( el=> parseInt(el).toString(2))
+    let binArr = arr.map(el => parseInt(el).toString(2))
+    //console.log("Binary array:", binArr)
 
-    let weightArr = binArr.map ( el=> {
-        return countBits(el);
+    let weightArr = binArr.map(el => countBits(el))
+    //console.log("Weight array:", weightArr)
+
+    let tmpArr = arr.map( (el,idx) =>  [el, weightArr[idx]] )
+                       .sort((a, b) => {
+                           return a[1] - b[1]
+                       })
+
+    tmpArr.sort( (a,b)=> {
+        if (a[1] === b[1] && a[0] < b[0]) {
+            return -1
+        }
     })
-    console.log("Source array:",arr)
-    console.log("Binary array:",binArr)
-    console.log("Weight array:",weightArr)
 
-    //console.log(countBits(binArr[0]))
-    //binArr.sort()
-    //let result = binArr.map( el => parseInt(el,2))
-    //console.log("Sorted array:",result)
+    let result = tmpArr.map( el=> el[0])
 
+    return result
 }
 
-sortByBit(arr)
+console.log(sortByBit(arr))
 
 // TASK
 // In this kata you're expected to sort an array of 32-bit integers in ascending order of the number of on bits they have.
