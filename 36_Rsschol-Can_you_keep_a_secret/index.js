@@ -1,14 +1,19 @@
 function createSecretHolder(secret) {
+    let secretKey = secret
+    let getSecret = () => secretKey
+    let setSecret = (param) => secretKey = param
 
     return {
-        вернуть
+        getSecret,
+        setSecret
     }
-
 }
 
 obj = createSecretHolder(5)
 
-console.log(obj.getSecret(5))
+console.log(obj.getSecret())
+obj.setSecret(2)
+console.log(obj.getSecret())
 
 //TASK
 // There's no such thing as private properties on a coffeescript object! But, maybe there are?
@@ -39,3 +44,10 @@ console.log(obj.getSecret(5))
 //         // assert.strictEqual(1 + 1, 2);
 //     });
 // });
+//BEST
+// function createSecretHolder(secret) {
+//     return {
+//         getSecret: function() { return secret; },
+//         setSecret: function(v) { secret = v; }
+//     };
+// }
