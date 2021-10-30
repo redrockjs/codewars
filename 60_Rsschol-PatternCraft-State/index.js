@@ -13,16 +13,16 @@ class TankState {
 }
 
 class Tank {
-    constructor(state) {
-        this.state
+    constructor() {
+        this.state = new TankState()
     }
 
     get canMove() {
-        if (this.state === TankState) return this.canMove
+        return this.state.canMove
     }
 
     get damage() {
-        if (this.state === SiegeState) return this.damage
+        return this.state.damage
     }
 }
 
