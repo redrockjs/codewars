@@ -1,38 +1,22 @@
-
 class Marine {
     constructor(_damage, _armor) {
-
+        this.damage = _damage || 0;
+        this.armor = _armor || 0;
     }
-
-    get damage() { return 0; }
-    set damage(value) {  }
-
-    get armor() { return 0; }
-    set armor(value) {  }
 }
 
 class MarineWeaponUpgrade {
     constructor(marine) {
-
+        this.damage = marine.damage + 1;
+        this.armor = marine.armor;
     }
-
-    get damage() { return 0; }
-    set damage(value) {  }
-
-    get armor() { return 0; }
-    set armor(value) {  }
 }
 
 class MarineArmorUpgrade {
     constructor(marine) {
-
+        this.damage = marine.damage;
+        this.armor = marine.armor + 1;
     }
-
-    get damage() { return 0; }
-    set damage(value) {  }
-
-    get armor() { return 0; }
-    set armor(value) {  }
 }
 
 
